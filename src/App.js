@@ -5,9 +5,6 @@ import ListBooks from './ListBooks'
 import './App.css'
 
 
-
-
-
 class BooksApp extends React.Component {
   state = {
     /**
