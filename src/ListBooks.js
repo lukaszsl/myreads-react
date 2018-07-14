@@ -1,51 +1,7 @@
 import React from 'react'
 import * as BooksAPI from './BooksAPI'
+import BookShelf from './BookShelf'
 
-
-
-
-class BookShelf extends React.Component {
-
-state = {
-	shelfName: this.props.shelfStatus
-}
-
-	render() {
-
-const shelfName = this.state.shelfName
-		return (
-			<div className="bookshelf">
-				<h2 className="bookshelf-title">{this.props.shelfTitle}</h2>
-				<div className="bookshelf-books">
-					<ol className="books-grid">
-						{this.props.books.filter(function filterBooks(book) {
-							if (book.shelf === shelfName) return book
-						}).map((book) => (
-							<li key={book.id}>
-								<div className="book">
-									<div className="book-top">
-										<div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})` }}></div>
-										<div className="book-shelf-changer">
-											<select>
-												<option value="move" disabled>Move to...</option>
-												<option value="currentlyReading">Currently Reading</option>
-												<option value="wantToRead">Want to Read</option>
-												<option value="read">Read</option>
-												<option value="none">None</option>
-											</select>
-										</div>
-									</div>
-									<div className="book-title">{book.title}</div>
-									<div className="book-authors">{book.authors}</div>
-								</div>
-							</li>
-						))}
-					</ol>
-				</div>
-			</div>
-		)
-	}
-}
 
 class ListBooks extends React.Component {
 
@@ -54,11 +10,23 @@ class ListBooks extends React.Component {
 		allBooks: []
 	}
 
-	componentDidMount() {
-		BooksAPI.getAll().then((allBooks) => {
-			this.setState({ allBooks })
+	changeBookState = (book, shelf) => (
+		BooksAPI.update(book, shelf).then((allBooks) => {
+			console.log(shelf)
+			this.getAllBooks(allBooks)
 		})
-	}
+	)
+
+	getAllBooks = (allBooks) => (
+		BooksAPI.getAll().then((allBooks) => {
+		this.setState({ allBooks })
+		})
+	)
+
+	componentDidMount() {
+		this.getAllBooks(this.state.allBooks)
+		}
+
 
 	render() {
 		console.log(this.state.allBooks)
@@ -69,9 +37,9 @@ class ListBooks extends React.Component {
 				</div>
 				<div className="list-books-content">
 					<div>
-						<BookShelf books={this.state.allBooks} shelfTitle={"Currently Reading"} shelfStatus={"currentlyReading"}/>
-						<BookShelf books={this.state.allBooks} shelfTitle={"Want to Read"} shelfStatus={"wantToRead"}/>
-						<BookShelf books={this.state.allBooks} shelfTitle={"Read"} shelfStatus={"read"}/>
+						<BookShelf books={this.state.allBooks} onchangeBookStete={this.changeBookState} shelfTitle={"Currently Reading"} shelfStatus={"currentlyReading"}/>
+						<BookShelf books={this.state.allBooks} onchangeBookStete={this.changeBookState} shelfTitle={"Want to Read"} shelfStatus={"wantToRead"}/>
+						<BookShelf books={this.state.allBooks} onchangeBookStete={this.changeBookState} shelfTitle={"Read"} shelfStatus={"read"}/>
 					</div>
 				</div>
 				<div className="open-search">
