@@ -16,10 +16,12 @@ class BooksApp extends React.Component {
     showSearchPage: false
   }
 
+	switchToSearchPage = () => this.setState({ showSearchPage: true })
+
   render() {
     return (
       <div className="app">
-        {this.state.showSearchPage ? <SearchBooks/> : <ListBooks/>}
+        {this.state.showSearchPage ? <SearchBooks/> : <ListBooks onswitchToSearchPage={this.switchToSearchPage}/>}
       </div>
     )
   }
