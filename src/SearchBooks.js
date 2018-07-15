@@ -1,8 +1,26 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import * as BooksAPI from './BooksAPI'
 
 
 class SearchBooks extends React.Component {
+
+	state = {
+		searchedBooks: [],
+		query: ""
+	}
+
+	updateQuery = (query) => {
+		console.log(this.state.searchedBooks)
+		this.setState({ query: query })
+	}
+
+	getSerchedBooks = (query) => (
+		BooksAPI.search(query).then((searchedBooks) => {
+			this.setState({ searchedBooks })
+		})
+	)
+
 	render() {
 		return (
 			<div className="search-books">
@@ -17,12 +35,41 @@ class SearchBooks extends React.Component {
 							However, remember that the BooksAPI.search method DOES search by title or author. So, don't worry if
 							you don't find a specific author or title. Every search is limited by search terms.
 						*/}
-						<input type="text" placeholder="Search by title or author"/>
+						<input
+							type="text"
+							placeholder="Search by title or author"
+							value={this.state.query}
+							onChange={(event) => (
+								this.getSerchedBooks(event.target.value) &&
+								this.updateQuery(event.target.value)
+							)}
+						/>
 
 					</div>
 				</div>
 				<div className="search-books-results">
-					<ol className="books-grid"></ol>
+					<ol className="books-grid">
+						{this.state.searchedBooks.map((book) => (
+							<li key={book.id}>
+								<div className="book">
+									<div className="book-top">
+										<div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})` }}></div>
+										<div className="book-shelf-changer">
+											<select onChange={(e) => (this.props.onchangeBookStete(book, e.target.value))}>
+												<option value="move" disabled>Move to...</option>
+												<option value="currentlyReading">Currently Reading</option>
+												<option value="wantToRead">Want to Read</option>
+												<option value="read">Read</option>
+												<option value="none">None</option>
+											</select>
+										</div>
+									</div>
+									<div className="book-title">{book.title}</div>
+									<div className="book-authors">{book.authors}</div>
+								</div>
+							</li>
+						))}
+					</ol>
 				</div>
 			</div>
 		)

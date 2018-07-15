@@ -13,7 +13,6 @@ class ListBooks extends React.Component {
 
 	changeBookState = (book, shelf) => (
 		BooksAPI.update(book, shelf).then((allBooks) => {
-			console.log(shelf)
 			this.getAllBooks(allBooks)
 		})
 	)
