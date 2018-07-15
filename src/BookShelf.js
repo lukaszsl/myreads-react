@@ -22,7 +22,7 @@ const shelfName = this.state.shelfName
 									<div className="book-top">
 										<div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})` }}></div>
 										<div className="book-shelf-changer">
-											<select onChange={(e) => (this.props.onchangeBookStete(book, e.target.value))}>
+											<select onChange={(e) => (this.props.onchangeBookState(book, e.target.value))}>
 												<option value="move" disabled>Move to...</option>
 												<option value="currentlyReading">Currently Reading</option>
 												<option value="wantToRead">Want to Read</option>
