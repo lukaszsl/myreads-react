@@ -10,7 +10,7 @@ class SearchBooks extends React.Component {
 	}
 
 	updateQuery = (query) => {
-		this.setState({ query: query })
+		this.setState({ query })
 	}
 
 	getSerchedBooks = (query) => (
@@ -37,10 +37,11 @@ class SearchBooks extends React.Component {
 							type="text"
 							placeholder="Search by title or author"
 							value={this.state.query}
-							onChange={(event) => (
-								this.getSerchedBooks(event.target.value) &&
+							onChange={(event) => {
 								this.updateQuery(event.target.value)
-							)}
+								if (event.target.value) this.getSerchedBooks(event.target.value)
+								else this.setState({searchedBooks: []})
+							}}
 						/>
 					</div>
 				</div>
