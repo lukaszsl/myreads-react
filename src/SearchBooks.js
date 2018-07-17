@@ -17,7 +17,6 @@ class SearchBooks extends React.Component {
 	getSerchedBooks = (query) => (
 		BooksAPI.search(query).then((searchedBooks) => {
 			this.setState({ searchedBooks })
-			console.log(searchedBooks)
 		})
 	)
 
@@ -49,26 +48,30 @@ class SearchBooks extends React.Component {
 				</div>
 				<div className="search-books-results">
 					<ol className="books-grid">
-						{this.state.searchedBooks.map((book) => (
-							<li key={book.id}>
-								<div className="book">
-									<div className="book-top">
-										<div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})` }}></div>
-										<div className="book-shelf-changer">
-											<select value={book.shelf} onChange={(e) => (this.props.onchangeBookState(book, e.target.value))}>
-												<option value="move" disabled>Move to...</option>
-												<option value="currentlyReading">Currently Reading</option>
-												<option value="wantToRead">Want to Read</option>
-												<option value="read">Read</option>
-												<option value="none">None</option>
-											</select>
+						{this.state.searchedBooks.map(searchedBook => {
+							let result = this.props.booksState.find(book => book.id === searchedBook.id)
+							console.log(result)
+							return (
+								<li key={searchedBook.id}>
+									<div className="book">
+										<div className="book-top">
+											<div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${searchedBook.imageLinks.smallThumbnail})` }}></div>
+											<div className="book-shelf-changer">
+												<select value={result ? result.shelf : "none"} onChange={(e) => (this.props.onchangeBookState(searchedBook, e.target.value))}>
+													<option value="move" disabled>Move to...</option>
+													<option value="currentlyReading">Currently Reading</option>
+													<option value="wantToRead">Want to Read</option>
+													<option value="read">Read</option>
+													<option value="none">None</option>
+												</select>
+											</div>
 										</div>
+										<div className="book-title">{searchedBook.title}</div>
+										<div className="book-authors">{searchedBook.authors}</div>
 									</div>
-									<div className="book-title">{book.title}</div>
-									<div className="book-authors">{book.authors}</div>
-								</div>
-							</li>
-						))}
+								</li>
+							)
+						})}
 					</ol>
 				</div>
 			</div>
