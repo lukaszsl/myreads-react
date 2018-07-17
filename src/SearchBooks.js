@@ -4,7 +4,6 @@ import * as BooksAPI from './BooksAPI'
 
 
 class SearchBooks extends React.Component {
-
 	state = {
 		searchedBooks: [],
 		query: ""
@@ -43,14 +42,12 @@ class SearchBooks extends React.Component {
 								this.updateQuery(event.target.value)
 							)}
 						/>
-
 					</div>
 				</div>
 				<div className="search-books-results">
 					<ol className="books-grid">
 						{this.state.searchedBooks.map(searchedBook => {
 							let result = this.props.booksState.find(book => book.id === searchedBook.id)
-							console.log(result)
 							return (
 								<li key={searchedBook.id}>
 									<div className="book">

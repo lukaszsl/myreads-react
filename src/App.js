@@ -7,7 +7,6 @@ import './App.css'
 
 
 class BooksApp extends React.Component {
-
 	state = {
 		allBooks: []
 	}
@@ -18,28 +17,32 @@ class BooksApp extends React.Component {
 		})
 	)
 
-	componentDidMount() {
-		this.getAllBooks(this.state.allBooks)
-		}
-
 	getAllBooks = (allBooks) => (
 		BooksAPI.getAll().then((allBooks) => {
 		this.setState({ allBooks })
 		})
 	)
 
-  render() {
-    return (
-      <div className="app">
+	componentDidMount() {
+		this.getAllBooks(this.state.allBooks)
+		}
+
+	render() {
+		return (
+			<div className="app">
 				<Route exact path="/" render={() => (
-					<ListBooks booksState={this.state.allBooks} onchangeBookState={this.changeBookState}/>
-				)}/>
+					<ListBooks
+						booksState={this.state.allBooks}
+						onchangeBookState={this.changeBookState} />
+				)} />
 				<Route path="/search" render={() => (
-					<SearchBooks booksState={this.state.allBooks} onchangeBookState={this.changeBookState}/>
-				)}/>
-      </div>
-    )
-  }
+					<SearchBooks
+						booksState={this.state.allBooks}
+						onchangeBookState={this.changeBookState} />
+				)} />
+			</div>
+		)
+	}
 }
 
 export default BooksApp

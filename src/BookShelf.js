@@ -1,37 +1,36 @@
 import React from 'react'
 
 class BookShelf extends React.Component {
-
-state = {
-	shelfName: this.props.shelfStatus,
-	option: [
-		{
-			"value": "move",
-			"text": "Move to...",
-			"key": "move"
-		},
-		{
-			"value": "currentlyReading",
-			"text": "Currently Reading",
-			"key": "currentlyReading"
-		},
-		{
-			"value": "wantToRead",
-			"text": "Want to Read",
-			"key": "wantToRead"
-		},
-		{
-			"value": "read",
-			"text": "Read",
-			"key": "read"
-		},
-		{
-			"value": "none",
-			"text": "None",
-			"key": "none"
-		},
-	]
-}
+	state = {
+		shelfName: this.props.shelfStatus,
+		option: [
+			{
+				"value": "move",
+				"text": "Move to...",
+				"key": "move"
+			},
+			{
+				"value": "currentlyReading",
+				"text": "Currently Reading",
+				"key": "currentlyReading"
+			},
+			{
+				"value": "wantToRead",
+				"text": "Want to Read",
+				"key": "wantToRead"
+			},
+			{
+				"value": "read",
+				"text": "Read",
+				"key": "read"
+			},
+			{
+				"value": "none",
+				"text": "None",
+				"key": "none"
+			},
+		]
+	}
 
 	render() {
 		const shelfName = this.state.shelfName

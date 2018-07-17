@@ -4,8 +4,6 @@ import BookShelf from './BookShelf'
 
 
 class ListBooks extends React.Component {
-
-
 	render() {
 		return (
 			<div className="list-books">
@@ -14,9 +12,20 @@ class ListBooks extends React.Component {
 				</div>
 				<div className="list-books-content">
 					<div>
-						<BookShelf books={this.props.booksState} onchangeBookState={this.props.onchangeBookState} shelfTitle={"Currently Reading"} shelfStatus={"currentlyReading"}/>
-						<BookShelf books={this.props.booksState} onchangeBookState={this.props.onchangeBookState} shelfTitle={"Want to Read"} shelfStatus={"wantToRead"}/>
-						<BookShelf books={this.props.booksState} onchangeBookState={this.props.onchangeBookState} shelfTitle={"Read"} shelfStatus={"read"}/>
+						<BookShelf
+							books={this.props.booksState}
+							onchangeBookState={this.props.onchangeBookState}
+							shelfTitle={"Currently Reading"} shelfStatus={"currentlyReading"} />
+						<BookShelf
+							books={this.props.booksState}
+							onchangeBookState={this.props.onchangeBookState}
+							shelfTitle={"Want to Read"}
+							shelfStatus={"wantToRead"} />
+						<BookShelf
+							books={this.props.booksState}
+							onchangeBookState={this.props.onchangeBookState}
+							shelfTitle={"Read"}
+							shelfStatus={"read"} />
 					</div>
 				</div>
 				<div className="open-search">
