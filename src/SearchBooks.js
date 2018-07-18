@@ -53,7 +53,7 @@ class SearchBooks extends React.Component {
 								<li key={searchedBook.id}>
 									<div className="book">
 										<div className="book-top">
-											<div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${searchedBook.imageLinks.smallThumbnail})` }}></div>
+											<div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${searchedBook.imageLinks ? searchedBook.imageLinks.smallThumbnail : "#"})` }}></div>
 											<div className="book-shelf-changer">
 												<select value={result ? result.shelf : "none"} onChange={(e) => (this.props.onchangeBookState(searchedBook, e.target.value))}>
 													<option value="move" disabled>Move to...</option>
@@ -65,7 +65,7 @@ class SearchBooks extends React.Component {
 											</div>
 										</div>
 										<div className="book-title">{searchedBook.title}</div>
-										<div className="book-authors">{searchedBook.authors}</div>
+										<div className="book-authors">{searchedBook.authors ? searchedBook.authors.join(', ') : searchedBook.authors}</div>
 									</div>
 								</li>
 							)
