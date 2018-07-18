@@ -3,33 +3,6 @@ import React from 'react'
 class BookShelf extends React.Component {
 	state = {
 		shelfName: this.props.shelfStatus,
-		option: [
-			{
-				"value": "move",
-				"text": "Move to...",
-				"key": "move"
-			},
-			{
-				"value": "currentlyReading",
-				"text": "Currently Reading",
-				"key": "currentlyReading"
-			},
-			{
-				"value": "wantToRead",
-				"text": "Want to Read",
-				"key": "wantToRead"
-			},
-			{
-				"value": "read",
-				"text": "Read",
-				"key": "read"
-			},
-			{
-				"value": "none",
-				"text": "None",
-				"key": "none"
-			},
-		]
 	}
 
 	render() {
@@ -48,7 +21,7 @@ class BookShelf extends React.Component {
 										<div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks ? book.imageLinks.smallThumbnail : "#"})` }}></div>
 										<div className="book-shelf-changer">
 											<select value={book.shelf} onChange={(e) => (this.props.onchangeBookState(book, e.target.value))}>
-												<option value= "move" disabled>{this.state.option[0].text}</option>
+												<option value= "move" disabled>"Move to..."</option>
 												<option value="currentlyReading">Currently Reading</option>
 												<option value="wantToRead">Want to Read</option>
 												<option value="read">Read</option>
